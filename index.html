@@ -3,226 +3,194 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>مملكة جوجو الأسطورية ✨</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <title>مملكة جوجو ✨</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;900&family=Reem+Kufi:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --primary-pink: #ff2d55;
+            --primary: #ff2d75;
             --gold: #d4af37;
-            --dark-bg: #050505;
-            --glass-card: rgba(10, 10, 10, 0.88);
-            --border-glow: rgba(212, 175, 55, 0.3);
+            --bg-dark: #080808;
+            --glass: rgba(20, 20, 20, 0.75);
+            --border: rgba(212, 175, 55, 0.2);
+            --shadow: 0 20px 40px rgba(0,0,0,0.6);
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Cairo', sans-serif; -webkit-tap-highlight-color: transparent; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Cairo', sans-serif; scroll-behavior: smooth; }
+        body { background-color: var(--bg-dark); color: #fff; line-height: 1.6; overflow-x: hidden; }
 
-        body {
-            background-color: var(--dark-bg);
-            color: white;
-            min-height: 100vh;
-            overflow-x: hidden;
-            background: linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.85)), 
-                        url("f956e35f-ff68-4a94-a494-7abda014cc55.jpg") no-repeat center center fixed;
-            background-size: cover;
-        }
-
-        .bokeh-overlay {
+        .background-wrap {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            pointer-events: none; z-index: 0;
-            background: radial-gradient(circle at 50% 50%, rgba(255, 45, 85, 0.1), transparent 80%);
+            background: linear-gradient(135deg, rgba(0,0,0,0.85), rgba(20,5,10,0.9)), 
+                        url('f956e35f-ff68-4a94-a494-7abda014cc55.jpg') center/cover no-repeat;
+            z-index: -1;
         }
 
-        .container { width: 100%; max-width: 450px; padding: 100px 20px 60px; margin: 0 auto; position: relative; z-index: 2; }
+        .container { max-width: 450px; margin: 0 auto; padding: 60px 20px; }
 
-        /* Card Style */
+        /* البطاقة التعريفية */
         .hero-card {
-            background: var(--glass-card); backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px);
-            border-radius: 50px; padding: 90px 25px 40px; text-align: center;
-            border: 1px solid var(--border-glow); box-shadow: 0 40px 100px rgba(0,0,0,0.9);
-            position: relative; animation: fadeInScale 1.5s ease-out;
+            background: var(--glass); backdrop-filter: blur(30px); -webkit-backdrop-filter: blur(30px);
+            border-radius: 45px; padding: 85px 25px 35px; text-align: center;
+            border: 1px solid var(--border); box-shadow: var(--shadow);
+            position: relative; margin-bottom: 40px; animation: cardEntrance 1.2s ease-out;
+        }
+
+        .profile-pic-frame {
+            position: absolute; top: -60px; left: 50%; transform: translateX(-50%);
+            width: 125px; height: 125px; border-radius: 50%; padding: 4px;
+            background: linear-gradient(135deg, var(--gold), var(--primary));
+            box-shadow: 0 15px 35px rgba(255, 45, 117, 0.4);
         }
 
         .profile-pic {
-            position: absolute; top: -70px; left: 50%; transform: translateX(-50%);
-            width: 140px; height: 140px; border-radius: 50%;
-            background: url("50029e42-2248-41aa-a26f-73c08b5eaf75.jpg") no-repeat center center/cover;
-            border: 4px solid var(--gold); box-shadow: 0 0 40px var(--primary-pink); z-index: 10;
+            width: 100%; height: 100%; border-radius: 50%;
+            background: url('50029e42-2248-41aa-a26f-73c08b5eaf75.jpg') center/cover;
+            border: 3px solid #000;
         }
 
-        .main-title { font-size: 3.5rem; font-weight: 900; text-shadow: 0 0 20px var(--primary-pink); margin-bottom: 5px; }
-        .subtitle { color: var(--gold); letter-spacing: 3px; font-weight: 700; display: block; margin-bottom: 25px; }
-
-        /* Timer & Beats */
-        .timer-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 25px 0; }
-        .t-box { background: rgba(255, 255, 255, 0.05); padding: 15px 5px; border-radius: 20px; border: 1px solid rgba(212, 175, 55, 0.1); }
-        .t-box span { display: block; font-size: 1.8rem; font-weight: 900; color: var(--primary-pink); }
-        .t-box small { color: var(--gold); font-size: 0.7rem; font-weight: bold; }
-
-        /* Love Meter */
-        .love-meter { margin: 20px 0; background: rgba(255, 255, 255, 0.05); border-radius: 20px; height: 15px; border: 1px solid var(--border-glow); overflow: hidden; }
-        .love-fill { width: 0%; height: 100%; background: linear-gradient(90deg, var(--gold), var(--primary-pink)); transition: width 3s ease-in-out; }
-
-        /* Traits Grid */
-        .traits-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 20px 0; }
-        .trait-card { 
-            background: rgba(255, 255, 255, 0.04); border: 1px solid var(--border-glow); 
-            padding: 15px; border-radius: 20px; text-align: center; transition: 0.3s;
-        }
-        .trait-card:active { transform: scale(0.9); background: var(--primary-pink); }
-        .trait-card i { color: var(--gold); font-size: 1.2rem; margin-bottom: 5px; display: block; }
-
-        /* Sections */
-        .section-header { margin: 50px 0 25px; text-align: center; }
-        .section-header h2 { font-size: 1.6rem; font-weight: 900; color: white; }
-        .section-header .line { width: 50px; height: 3px; background: var(--gold); margin: 8px auto; border-radius: 10px; }
-
-        .gallery { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-        .gallery-item { border-radius: 25px; overflow: hidden; height: 180px; border: 1px solid var(--border-glow); }
-        .gallery-item img { width: 100%; height: 100%; object-fit: cover; }
-
-        .secret-btn {
-            background: linear-gradient(45deg, var(--gold), var(--primary-pink));
-            border: none; padding: 18px; border-radius: 50px;
-            color: white; font-weight: 900; width: 100%; cursor: pointer;
-            box-shadow: 0 10px 20px rgba(255, 45, 85, 0.3);
+        .main-title { 
+            font-family: 'Reem Kufi', sans-serif; font-size: 3.2rem; 
+            background: linear-gradient(to bottom, #fff, var(--gold));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
         }
 
-        #secret-content { display: none; margin-top: 20px; padding: 20px; background: rgba(255,255,255,0.05); border-radius: 25px; border: 1px dashed var(--gold); line-height: 1.8; font-style: italic; }
+        .timer-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 30px 0; }
+        .timer-item { background: rgba(255,255,255,0.03); border-radius: 20px; padding: 12px 5px; border: 1px solid rgba(255,255,255,0.05); }
+        .timer-item span { display: block; font-size: 1.7rem; font-weight: 900; color: var(--primary); }
+        .timer-item small { font-size: 0.7rem; color: #888; }
 
-        /* Animations */
-        .sparkle { position: fixed; width: 12px; height: 12px; border-radius: 50%; pointer-events: none; z-index: 9999; animation: sparkleAnim 0.8s linear forwards; }
-        @keyframes sparkleAnim { to { transform: translateY(-60px) scale(0); opacity: 0; } }
+        .love-bar { height: 10px; background: rgba(255,255,255,0.05); border-radius: 20px; overflow: hidden; margin: 15px 0; border: 1px solid var(--border); }
+        .love-fill { width: 0; height: 100%; background: linear-gradient(90deg, var(--gold), var(--primary)); transition: width 3s ease; }
+
+        /* الأقسام */
+        .section-header { margin: 40px 0 20px; display: flex; align-items: center; justify-content: space-between; }
+        .header-line { flex: 1; height: 1px; background: linear-gradient(90deg, var(--border), transparent); margin-right: 15px; }
+
+        .features { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        .feature-card { background: var(--glass); border: 1px solid var(--border); padding: 20px; border-radius: 25px; text-align: center; transition: 0.3s; }
+        .feature-card i { font-size: 1.5rem; color: var(--gold); margin-bottom: 10px; display: block; }
+
+        /* الزر الجديد (الصفحة التالية) */
+        .nav-section { text-align: center; margin-top: 40px; }
+        .btn-memories {
+            display: inline-block; text-decoration: none;
+            background: rgba(212, 175, 55, 0.1);
+            color: var(--gold); border: 1px solid var(--gold);
+            padding: 18px 40px; border-radius: 50px;
+            font-weight: 900; font-size: 0.95rem;
+            transition: 0.4s; position: relative;
+            overflow: hidden; animation: pulseGlow 2s infinite;
+        }
+        .btn-memories:hover { background: var(--gold); color: #000; transform: translateY(-3px); }
+        .btn-memories i { margin-right: 10px; transition: 0.3s; }
+        .btn-memories:hover i { transform: translateX(-5px); }
+
+        /* صندوق الأسرار */
+        .secret-box { background: var(--glass); padding: 35px 20px; border-radius: 35px; text-align: center; border: 1px dashed var(--gold); }
+        .btn-glow { background: linear-gradient(45deg, var(--primary), #ff758c); color: #fff; border: none; padding: 15px 35px; border-radius: 50px; font-weight: 900; cursor: pointer; box-shadow: 0 10px 20px rgba(255, 45, 117, 0.3); }
+
+        @keyframes cardEntrance { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes pulseGlow { 0% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.4); } 70% { box-shadow: 0 0 0 15px rgba(212, 175, 55, 0); } 100% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0); } }
         
-        .floating { position: fixed; pointer-events: none; z-index: 100; animation: floatUp 5s linear forwards; }
-        @keyframes floatUp { 0% { transform: translateY(0) scale(0); opacity: 0; } 100% { transform: translateY(-100vh) scale(1.5); opacity: 0; } }
+        .heart-float { position: fixed; pointer-events: none; z-index: 100; animation: floatUp 4s forwards; }
+        @keyframes floatUp { 0% { transform: translateY(0) scale(0); opacity: 0; } 50% { opacity: 0.8; } 100% { transform: translateY(-100vh) scale(1.5); opacity: 0; } }
 
-        footer { text-align: center; margin-top: 50px; padding-bottom: 40px; color: var(--gold); opacity: 0.6; font-size: 0.8rem; }
-        @keyframes fadeInScale { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
+        footer { text-align: center; padding: 50px 0; color: #444; font-size: 0.7rem; letter-spacing: 2px; }
     </style>
 </head>
 <body>
 
-    <div class="bokeh-overlay"></div>
+    <div class="background-wrap"></div>
 
     <div class="container">
         <div class="hero-card">
-            <div class="profile-pic"></div>
+            <div class="profile-pic-frame"><div class="profile-pic"></div></div>
             <h1 class="main-title">جوجو</h1>
             <span class="subtitle">♛ ملكةُ مملكَتِي ♛</span>
-            
-            <div id="greeting" style="font-size: 0.9rem; color: var(--gold); margin-bottom: 15px; font-weight: bold;"></div>
 
             <div class="timer-grid">
-                <div class="t-box"><span id="days">0</span><small>يوم</small></div>
-                <div class="t-box"><span id="hours">0</span><small>ساعة</small></div>
-                <div class="t-box"><span id="mins">0</span><small>دقيقة</small></div>
+                <div class="timer-item"><span id="d">0</span><small>يوم</small></div>
+                <div class="timer-item"><span id="h">0</span><small>ساعة</small></div>
+                <div class="timer-item"><span id="m">0</span><small>دقيقة</small></div>
             </div>
 
-            <p style="font-size: 0.8rem; color: var(--gold);">نبضات قلبي في حُبكِ:</p>
-            <div id="beats" style="font-size: 1.8rem; font-weight: 900; color: var(--primary-pink); margin-bottom: 15px;">0</div>
-
-            <div class="love-meter"><div id="loveFill" class="love-fill"></div></div>
-            <div id="lovePercent" style="font-size: 0.75rem; color: var(--gold); font-weight: 900;">0%</div>
+            <div class="love-bar"><div id="love-fill" class="love-fill"></div></div>
+            <p id="love-percent" style="font-size: 0.8rem; color: var(--gold); font-weight: bold;">جاري قياس العشق...</p>
         </div>
 
-        <div class="section-header"><h2>لماذا أنتِ؟ 💎</h2><div class="line"></div></div>
-        <div class="traits-grid">
-            <div class="trait-card" onclick="alert('لأن قلبكِ لا يشبهه أحد ❤️')"><i class="fas fa-heart"></i><span>حنونة</span></div>
-            <div class="trait-card" onclick="alert('ضحكتكِ هي لحني المفضل 🎶')"><i class="fas fa-smile-beam"></i><span>ضحكتكِ</span></div>
-            <div class="trait-card" onclick="alert('ذكاؤكِ هو ما سحرني أول مرة ✨')"><i class="fas fa-brain"></i><span>ذكية</span></div>
-            <div class="trait-card" onclick="alert('أقوى امرأة عرفتها 💪')"><i class="fas fa-gem"></i><span>قوية</span></div>
+        <div class="section-header"><h2>لماذا أنتِ؟</h2><div class="header-line"></div></div>
+        <div class="features">
+            <div class="feature-card" onclick="spawnHearts()"><i class="fas fa-gem"></i><strong>نادرة</strong></div>
+            <div class="feature-card" onclick="spawnHearts()"><i class="fas fa-heart"></i><strong>حنونة</strong></div>
         </div>
 
-        <div class="section-header"><h2> صور حبيبتي  📸</h2><div class="line"></div></div>
-        <div class="gallery">
-            <div class="gallery-item"><img src="7b8fc8fd-a307-40e9-85ff-b8f8aa10e8df.jpg"></div>
-            <div class="gallery-item"><img src="50029e42-2248-41aa-a26f-73c08b5eaf75.jpg"></div>
-        </div>
-
-        <div class="section-header"><h2>صندوق الأسرار ✨</h2><div class="line"></div></div>
-        <div class="chat-card">
-            <p style="margin-bottom: 15px;">رسالة مخبأة لكِ هنا..</p>
-            <button class="secret-btn" onclick="openSecret()">افتحي الرسالة ✉️</button>
-            <div id="secret-content">
-                "يا جوجو، أنتِ لستِ فقط حبيبتي، أنتِ موطني وأماني. شكراً لأنكِ في حياتي."
+        <div class="section-header"><h2>لغة القلوب</h2><div class="header-line"></div></div>
+        <div class="secret-box">
+            <div id="secret-lock">
+                <p style="margin-bottom: 20px; color: #aaa;">رسالة مشفرة لا يفتحها إلا اسمكِ..</p>
+                <button class="btn-glow" onclick="unlockSecret()">افتحي القفل 🔐</button>
             </div>
-            <div style="text-align: center; margin-top: 40px;">
-    <a href="memories.html" style="text-decoration: none; background: rgba(255,255,255,0.05); border: 1px solid var(--gold); padding: 15px 40px; border-radius: 50px; color: var(--gold); font-weight: bold; display: inline-block; box-shadow: 0 0 15px rgba(212, 175, 55, 0.2);">
-        انتقلي إلى عالم ذكرياتنا ➔
-    </a>
-</div>
+            <div id="secret-content" style="display:none;">
+                <p style="font-family: 'Reem Kufi', serif; font-size: 1.1rem; color: var(--gold);">"أنتِ الموطن والملجأ، أنتِ قطعة من الجنة في حياتي."</p>
+            </div>
         </div>
 
+        <div class="nav-section">
+            <a href="memories.html" class="btn-memories">
+                <i class="fas fa-arrow-right"></i>
+                انتقلي إلى عالم ذكرياتنا
+            </a>
+            <p style="color: #444; font-size: 0.65rem; margin-top: 15px;">انقري هنا لمشاهدة أجمل اللحظات</p>
+        </div>
 
         <footer>صُنع بِكُل حُب لأجلِكِ وَحدكِ | 2026</footer>
     </div>
 
     <script>
-        const start = new Date('2026-01-11T00:00:00');
-        
-        // Timer & Beats
-        function update() {
+        const anniversary = new Date('2026-01-11T00:00:00');
+        function updateTimer() {
             const now = new Date();
-            const diff = now - start;
-            document.getElementById('days').innerText = Math.floor(diff / 86400000);
-            document.getElementById('hours').innerText = Math.floor((diff / 3600000) % 24);
-            document.getElementById('mins').innerText = Math.floor((diff / 60000) % 60);
-            document.getElementById('beats').innerText = (Math.floor(diff / 60000) * 80).toLocaleString();
+            const diff = now - anniversary;
+            document.getElementById('d').innerText = Math.floor(diff / 86400000);
+            document.getElementById('h').innerText = Math.floor((diff / 3600000) % 24);
+            document.getElementById('m').innerText = Math.floor((diff / 60000) % 60);
         }
-        setInterval(update, 1000); update();
+        setInterval(updateTimer, 1000);
+        updateTimer();
 
-        // Greeting
-        const hour = new Date().getHours();
-        const g = document.getElementById('greeting');
-        if (hour >= 5 && hour < 12) g.innerText = "صباح الجمال يا جوجو ☀️";
-        else if (hour >= 12 && hour < 18) g.innerText = "يومكِ سعيد يا أميرتي 🌸";
-        else g.innerText = "طاب مساؤكِ يا قمر ليلتي 🌙";
-
-        // Love Meter
         setTimeout(() => {
-            document.getElementById('loveFill').style.width = '100%';
-            let c = 0;
-            const inv = setInterval(() => {
-                if(c >= 100) clearInterval(inv);
-                document.getElementById('lovePercent').innerText = "نِسبة الحُب: " + (c++) + ".999.999%";
+            document.getElementById('love-fill').style.width = '100%';
+            let p = 0;
+            const interval = setInterval(() => {
+                if(p >= 100) clearInterval(interval);
+                document.getElementById('love-percent').innerText = `نسبة الانتماء: 100.${p++}%`;
             }, 30);
         }, 800);
 
-        // Secret Content
-        function openSecret() {
-            const p = prompt("كلمة السر (اسمكِ بالدلع):");
-            if(p === "جوجو") {
+        function unlockSecret() {
+            const pass = prompt("من هي ملكة هذا القلب؟");
+            if(pass === "جوجو") {
+                document.getElementById('secret-lock').style.display = 'none';
                 document.getElementById('secret-content').style.display = 'block';
-                window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+                spawnHearts();
             } else { alert("حاولي مجدداً يا أميرتي! 😉"); }
         }
 
-        // Sparkles on Touch
-        document.addEventListener('touchstart', (e) => {
-            for(let i=0; i<6; i++) {
-                const s = document.createElement('div');
-                s.className = 'sparkle';
-                s.style.left = e.touches[0].pageX + 'px';
-                s.style.top = e.touches[0].pageY + 'px';
-                s.style.background = i % 2 === 0 ? '#ff2d55' : '#d4af37';
-                document.body.appendChild(s);
-                setTimeout(() => s.remove(), 800);
+        function spawnHearts() {
+            for(let i=0; i<15; i++) {
+                setTimeout(() => {
+                    const heart = document.createElement('div');
+                    heart.className = 'fas fa-heart heart-float';
+                    heart.style.left = Math.random() * 100 + 'vw';
+                    heart.style.bottom = '0';
+                    heart.style.color = i % 2 === 0 ? 'var(--primary)' : 'var(--gold)';
+                    heart.style.fontSize = (Math.random() * 20 + 10) + 'px';
+                    document.body.appendChild(heart);
+                    setTimeout(() => heart.remove(), 4000);
+                }, i * 100);
             }
-        });
-
-        // Floating Icons
-        const icons = ['❤️', '✨', '👑', '🌸'];
-        setInterval(() => {
-            const el = document.createElement('div');
-            el.className = 'floating';
-            el.innerHTML = icons[Math.floor(Math.random()*icons.length)];
-            el.style.left = Math.random() * 100 + 'vw';
-            el.style.bottom = "-50px";
-            document.body.appendChild(el);
-            setTimeout(() => el.remove(), 5000);
-        }, 600);
+        }
     </script>
 </body>
-
 </html>
