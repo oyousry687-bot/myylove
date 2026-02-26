@@ -13,9 +13,9 @@
             --primary-pink: #ff2d55;
             --gold: #d4af37;
             --dark-bg: #050505;
-            --glass: rgba(15, 15, 15, 0.85);
-            --border: rgba(212, 175, 55, 0.25);
-            --transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+            --glass: rgba(20, 20, 20, 0.8);
+            --border: rgba(212, 175, 55, 0.3);
+            --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         * { 
@@ -28,15 +28,15 @@
             background-color: var(--dark-bg);
             color: white;
             min-height: 100vh;
-            /* استبدل رابط الصورة برابط صورتك إذا لزم الأمر */
-            background: linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.85)), 
+            /* استبدل الرابط بصورتك الخلفية */
+            background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.9)), 
                         url("7b8fc8fd-a307-40e9-85ff-b8f8aa10e8df.jpg") no-repeat center center fixed;
             background-size: cover;
             padding: 20px;
             overflow-x: hidden;
         }
 
-        /* زر العودة الأنيق */
+        /* زر العودة */
         .back-btn {
             position: fixed; top: 20px; right: 20px;
             color: white; text-decoration: none; font-size: 0.85rem;
@@ -46,22 +46,23 @@
             display: flex; align-items: center; gap: 10px;
             transition: var(--transition);
         }
-        .back-btn:hover { background: var(--gold); color: #000; }
+        .back-btn:hover { background: var(--gold); color: #000; transform: scale(1.05); }
 
         header { 
-            text-align: center; margin: 80px 0 40px; 
+            text-align: center; margin: 100px 0 60px; 
             animation: fadeInDown 1s ease-out;
         }
         header h1 { 
             font-family: 'Reem Kufi', sans-serif;
-            font-size: 2.8rem; font-weight: 900; 
+            font-size: clamp(2rem, 8vw, 3.5rem); font-weight: 900; 
             background: linear-gradient(to bottom, #fff, var(--gold)); 
             -webkit-background-clip: text; -webkit-text-fill-color: transparent; 
+            margin-bottom: 10px;
         }
-        header p { color: var(--gold); font-size: 0.9rem; opacity: 0.8; margin-top: 5px; letter-spacing: 1px; }
+        header p { color: var(--gold); font-size: 1rem; opacity: 0.9; letter-spacing: 1px; }
 
-        /* Timeline */
-        .timeline { position: relative; margin: 40px 0; }
+        /* Timeline Fixes */
+        .timeline { position: relative; max-width: 800px; margin: 40px auto; padding: 20px 0; }
         .timeline::after {
             content: ''; position: absolute; width: 2px; 
             background: linear-gradient(to bottom, transparent, var(--gold), transparent);
@@ -69,98 +70,91 @@
         }
 
         .timeline-item {
-            padding: 20px; position: relative; width: 50%;
-            animation: fadeInUp 1.2s ease-out both;
+            padding: 10px 40px; position: relative; width: 50%;
+            animation: fadeInUp 1s ease-out both;
         }
 
         .timeline-item::after {
-            content: ''; position: absolute; width: 12px; height: 12px;
+            content: ''; position: absolute; width: 14px; height: 14px;
             background: var(--gold); box-shadow: 0 0 15px var(--gold);
-            top: 35px; border-radius: 50%; z-index: 10;
+            top: 25px; border-radius: 50%; z-index: 10;
         }
 
-        .left { left: 0; text-align: left; padding-right: 30px; }
-        .right { left: 50%; text-align: right; padding-left: 30px; }
-        .left::after { right: -6px; }
-        .right::after { left: -6px; }
+        .left { left: 0; text-align: left; }
+        .right { left: 50%; text-align: right; }
+        .left::after { right: -7px; }
+        .right::after { left: -7px; }
 
         .content {
-            padding: 15px; background: var(--glass); 
+            padding: 20px; background: var(--glass); 
             border: 1px solid var(--border);
-            border-radius: 20px; backdrop-filter: blur(10px);
+            border-radius: 20px; backdrop-filter: blur(15px);
             transition: var(--transition);
         }
-        .content:hover { transform: scale(1.03); border-color: var(--gold); }
-        .content h3 { color: var(--gold); font-size: 0.9rem; margin-bottom: 5px; }
-        .content p { font-size: 0.85rem; line-height: 1.6; color: #ddd; }
+        .content:hover { transform: translateY(-5px); border-color: var(--gold); box-shadow: 0 10px 20px rgba(212, 175, 55, 0.1); }
+        .content h3 { color: var(--gold); font-size: 1rem; margin-bottom: 8px; font-weight: 700; }
+        .content p { font-size: 0.9rem; line-height: 1.7; color: #eee; }
 
         /* Memories Grid */
         .memories-grid {
-            display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 30px;
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); 
+            gap: 20px; max-width: 900px; margin: 40px auto;
         }
 
-        .memory-card { height: 220px; perspective: 1000px; }
+        .memory-card { height: 250px; perspective: 1000px; cursor: pointer; }
         .memory-inner {
             position: relative; width: 100%; height: 100%;
-            transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
             transform-style: preserve-3d;
         }
         .memory-card.flipped .memory-inner { transform: rotateY(180deg); }
 
         .memory-front, .memory-back {
             position: absolute; width: 100%; height: 100%; 
-            backface-visibility: hidden; border-radius: 25px; 
-            border: 1px solid var(--border);
+            backface-visibility: hidden; border-radius: 20px; 
+            border: 1px solid var(--border); overflow: hidden;
         }
-        .memory-front img { width: 100%; height: 100%; object-fit: cover; border-radius: 25px; }
+        .memory-front img { width: 100%; height: 100%; object-fit: cover; }
+        
         .memory-back {
-            background: linear-gradient(135deg, #111, #050505); 
+            background: linear-gradient(135deg, #1a1a1a, #050505); 
             color: var(--gold); display: flex; align-items: center; 
             justify-content: center; transform: rotateY(180deg); 
             padding: 20px; text-align: center;
         }
-        .memory-back p { font-size: 0.85rem; line-height: 1.6; font-style: italic; }
+        .memory-back p { font-size: 0.9rem; line-height: 1.6; font-style: italic; }
 
         .hint-text {
-            text-align: center; color: var(--gold); margin: 40px 0 10px;
-            font-size: 0.8rem; opacity: 0.6; display: flex; align-items: center; justify-content: center; gap: 8px;
+            text-align: center; color: var(--gold); margin: 50px 0 10px;
+            font-size: 0.85rem; opacity: 0.7; display: flex; align-items: center; justify-content: center; gap: 10px;
         }
 
-        /* زر الوعود المطور (Luxury Button) */
+        /* Luxury Button */
         .luxury-button {
-            position: relative;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            text-decoration: none;
-            padding: 18px 40px;
+            position: relative; display: inline-flex; align-items: center; justify-content: center;
+            text-decoration: none; padding: 18px 45px;
             background: rgba(212, 175, 55, 0.05);
-            border: 1px solid var(--gold);
-            border-radius: 100px;
-            overflow: hidden;
-            transition: var(--transition);
-            z-index: 1;
+            border: 1px solid var(--gold); border-radius: 100px;
+            overflow: hidden; transition: var(--transition);
             animation: pulse-gold 2s infinite;
         }
 
         .btn-content {
             display: flex; align-items: center; gap: 12px;
-            color: var(--gold); font-weight: 700; font-size: 1rem;
+            color: var(--gold); font-weight: 700; font-size: 1.1rem;
             z-index: 2; transition: 0.4s;
         }
 
         .btn-shimmer {
             position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.3), transparent);
+            background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.4), transparent);
             transition: 0.6s; z-index: 1;
         }
 
         .luxury-button:hover {
-            transform: translateY(-5px);
-            background: var(--gold);
-            box-shadow: 0 15px 30px rgba(212, 175, 55, 0.3);
+            transform: translateY(-5px); background: var(--gold);
+            box-shadow: 0 15px 30px rgba(212, 175, 55, 0.4);
         }
-
         .luxury-button:hover .btn-content { color: #000; }
         .luxury-button:hover .btn-shimmer { left: 100%; }
 
@@ -179,11 +173,20 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
+        /* Media Queries for Mobile */
+        @media (max-width: 600px) {
+            .timeline::after { left: 20px; }
+            .timeline-item { width: 100%; text-align: right; padding-left: 50px; padding-right: 0; }
+            .timeline-item.left, .timeline-item.right { left: 0; }
+            .timeline-item::after { left: 13px !important; right: auto !important; }
+            .memories-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+            .memory-card { height: 200px; }
+        }
+
         footer { 
-            text-align: center; margin-top: 60px; padding: 40px 0; 
-            border-top: 1px solid rgba(255,255,255,0.05); 
-            color: var(--gold); font-size: 0.75rem; opacity: 0.5; 
-            letter-spacing: 1px;
+            text-align: center; margin-top: 80px; padding: 40px 0; 
+            border-top: 1px solid rgba(212, 175, 55, 0.1); 
+            color: var(--gold); font-size: 0.8rem; opacity: 0.6; 
         }
     </style>
 </head>
@@ -197,17 +200,16 @@
     </header>
 
     <div class="timeline">
-         <div class="timeline-item left">
+        <div class="timeline-item right">
             <div class="content">
                 <h3>يناير ٢٠٢٦</h3>
                 <p>أول نبضة حقيقية.. اليوم الذي بدأ فيه كل شيء وتغير فيه عالمي.</p>
             </div>
         </div>
-         <div class="timeline">
-         <div class="timeline-item left">
+        
+        <div class="timeline-item left">
             <div class="content">
                 <h3>فبراير ٢٠٢٦</h3>
-             
                 <p>ضحكتكِ الأولى التي سكنت في ذاكرتي وصارت هي نشيدي المفضل.</p>
             </div>
         </div>
@@ -228,6 +230,7 @@
                 </div>
             </div>
         </div>
+        
         <div class="memory-card" onclick="this.classList.toggle('flipped')">
             <div class="memory-inner">
                 <div class="memory-front">
@@ -241,7 +244,7 @@
     </div>
 
     <div style="text-align: center; margin: 80px 0 40px;">
-        <p style="color: #666; font-size: 0.85rem; margin-bottom: 25px; letter-spacing: 1px;">بعد أن استعدنا ذكرياتنا.. دعينا ننظر للمستقبل</p>
+        <p style="color: #888; font-size: 0.9rem; margin-bottom: 25px;">بعد أن استعدنا ذكرياتنا.. دعينا ننظر للمستقبل</p>
         
         <a href="promises.html" class="luxury-button">
             <span class="btn-content">
@@ -255,7 +258,7 @@
     <footer>صُنع بكل حب لتخليد أجمل اللحظات | 2026</footer>
 
     <script>
-        // تفعيل استجابة اللمس على الهواتف
+        // تحسين استجابة اللمس للهواتف
         document.addEventListener('touchstart', function() {}, {passive: true});
     </script>
 </body>
