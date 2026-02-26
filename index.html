@@ -4,108 +4,295 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>مملكة جوجو ✨</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;900&family=Reem+Kufi:wght@400;700&display=swap" rel="stylesheet">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&family=Reem+Kufi:wght@500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <style>
         :root {
             --primary: #ff2d75;
             --gold: #d4af37;
-            --bg-dark: #080808;
-            --glass: rgba(20, 20, 20, 0.75);
-            --border: rgba(212, 175, 55, 0.2);
-            --shadow: 0 20px 40px rgba(0,0,0,0.6);
+            --bg-dark: #050505;
+            --glass: rgba(20, 20, 20, 0.8);
+            --border: rgba(212, 175, 55, 0.3);
+            --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Cairo', sans-serif; scroll-behavior: smooth; }
-        body { background-color: var(--bg-dark); color: #fff; line-height: 1.6; overflow-x: hidden; }
-
-        .background-wrap {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(135deg, rgba(0,0,0,0.85), rgba(20,5,10,0.9)), 
-                        url('f956e35f-ff68-4a94-a494-7abda014cc55.jpg') center/cover no-repeat;
-            z-index: -1;
+        * { 
+            margin: 0; padding: 0; box-sizing: border-box; 
+            font-family: 'Cairo', sans-serif; 
+            -webkit-tap-highlight-color: transparent; 
         }
 
-        .container { max-width: 450px; margin: 0 auto; padding: 60px 20px; }
+        body {
+            background-color: var(--bg-dark);
+            color: #fff;
+            min-height: 100vh;
+            background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.9)), 
+                        url('f956e35f-ff68-4a94-a494-7abda014cc55.jpg') no-repeat center center fixed;
+            background-size: cover;
+            overflow-x: hidden;
+        }
 
-        /* البطاقة التعريفية */
+        .container {
+            max-width: 450px;
+            margin: 0 auto;
+            padding: 80px 20px 40px;
+        }
+
+        /* Hero Card */
         .hero-card {
-            background: var(--glass); backdrop-filter: blur(30px); -webkit-backdrop-filter: blur(30px);
-            border-radius: 45px; padding: 85px 25px 35px; text-align: center;
-            border: 1px solid var(--border); box-shadow: var(--shadow);
-            position: relative; margin-bottom: 40px; animation: cardEntrance 1.2s ease-out;
+            background: var(--glass);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 40px;
+            padding: 70px 20px 30px;
+            text-align: center;
+            border: 1px solid var(--border);
+            position: relative;
+            animation: fadeInDown 1.2s ease-out;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
         }
 
         .profile-pic-frame {
-            position: absolute; top: -60px; left: 50%; transform: translateX(-50%);
-            width: 125px; height: 125px; border-radius: 50%; padding: 4px;
+            position: absolute;
+            top: -60px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            padding: 4px;
             background: linear-gradient(135deg, var(--gold), var(--primary));
-            box-shadow: 0 15px 35px rgba(255, 45, 117, 0.4);
+            box-shadow: 0 10px 25px rgba(255, 45, 117, 0.3);
+            animation: pulse-border 2s infinite;
         }
 
         .profile-pic {
-            width: 100%; height: 100%; border-radius: 50%;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
             background: url('50029e42-2248-41aa-a26f-73c08b5eaf75.jpg') center/cover;
             border: 3px solid #000;
         }
 
         .main-title { 
-            font-family: 'Reem Kufi', sans-serif; font-size: 3.2rem; 
+            font-family: 'Reem Kufi', sans-serif;
+            font-size: 2.8rem;
             background: linear-gradient(to bottom, #fff, var(--gold));
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 5px;
         }
 
-        .timer-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 30px 0; }
-        .timer-item { background: rgba(255,255,255,0.03); border-radius: 20px; padding: 12px 5px; border: 1px solid rgba(255,255,255,0.05); }
-        .timer-item span { display: block; font-size: 1.7rem; font-weight: 900; color: var(--primary); }
-        .timer-item small { font-size: 0.7rem; color: #888; }
+        .subtitle {
+            color: var(--gold);
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+            opacity: 0.8;
+            font-weight: 700;
+        }
 
-        .love-bar { height: 10px; background: rgba(255,255,255,0.05); border-radius: 20px; overflow: hidden; margin: 15px 0; border: 1px solid var(--border); }
-        .love-fill { width: 0; height: 100%; background: linear-gradient(90deg, var(--gold), var(--primary)); transition: width 3s ease; }
+        /* Timer Grid */
+        .timer-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin: 30px 0;
+        }
 
-        /* الأقسام */
-        .section-header { margin: 40px 0 20px; display: flex; align-items: center; justify-content: space-between; }
-        .header-line { flex: 1; height: 1px; background: linear-gradient(90deg, var(--border), transparent); margin-right: 15px; }
+        .timer-item {
+            background: rgba(255,255,255,0.05);
+            border-radius: 20px;
+            padding: 15px 5px;
+            border: 1px solid var(--border);
+            transition: var(--transition);
+        }
 
-        .features { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
-        .feature-card { background: var(--glass); border: 1px solid var(--border); padding: 20px; border-radius: 25px; text-align: center; transition: 0.3s; }
-        .feature-card i { font-size: 1.5rem; color: var(--gold); margin-bottom: 10px; display: block; }
+        .timer-item span {
+            display: block;
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: #fff;
+        }
 
-        /* الزر الجديد (الصفحة التالية) */
-        .nav-section { text-align: center; margin-top: 40px; }
+        .timer-item small {
+            font-size: 0.7rem;
+            color: var(--gold);
+            font-weight: bold;
+        }
+
+        /* Love Bar */
+        .love-container {
+            margin: 25px 0;
+        }
+
+        .love-bar {
+            height: 8px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            margin-bottom: 10px;
+        }
+
+        .love-fill {
+            width: 0%;
+            height: 100%;
+            background: linear-gradient(90deg, var(--gold), var(--primary));
+            transition: width 3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        #love-percent {
+            font-size: 0.8rem;
+            color: #eee;
+            font-weight: 400;
+        }
+
+        /* Section Styling */
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin: 40px 0 20px;
+            color: var(--gold);
+            font-weight: 700;
+        }
+
+        .section-title::after {
+            content: "";
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(90deg, var(--border), transparent);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .feature-card {
+            background: var(--glass);
+            border: 1px solid var(--border);
+            padding: 20px;
+            border-radius: 25px;
+            text-align: center;
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+        }
+
+        .feature-card i {
+            font-size: 1.5rem;
+            color: var(--gold);
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        /* Secret Box */
+        .secret-box {
+            background: var(--glass);
+            padding: 30px 20px;
+            border-radius: 30px;
+            text-align: center;
+            border: 1px dashed var(--gold);
+            margin-top: 20px;
+        }
+
+        .btn-glow {
+            background: linear-gradient(45deg, var(--primary), #ff758c);
+            color: #fff;
+            border: none;
+            padding: 14px 30px;
+            border-radius: 50px;
+            font-weight: 900;
+            cursor: pointer;
+            box-shadow: 0 8px 20px rgba(255, 45, 117, 0.3);
+            transition: var(--transition);
+        }
+
+        .btn-glow:hover { transform: scale(1.05); }
+
+        /* Navigation Button */
+        .nav-section {
+            text-align: center;
+            margin-top: 50px;
+        }
+
         .btn-memories {
-            display: inline-block; text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
             background: rgba(212, 175, 55, 0.1);
-            color: var(--gold); border: 1px solid var(--gold);
-            padding: 18px 40px; border-radius: 50px;
-            font-weight: 900; font-size: 0.95rem;
-            transition: 0.4s; position: relative;
-            overflow: hidden; animation: pulseGlow 2s infinite;
+            color: var(--gold);
+            border: 1px solid var(--gold);
+            padding: 16px 35px;
+            border-radius: 50px;
+            font-weight: 700;
+            transition: var(--transition);
+            animation: pulse-gold 2s infinite;
         }
-        .btn-memories:hover { background: var(--gold); color: #000; transform: translateY(-3px); }
-        .btn-memories i { margin-right: 10px; transition: 0.3s; }
-        .btn-memories:hover i { transform: translateX(-5px); }
 
-        /* صندوق الأسرار */
-        .secret-box { background: var(--glass); padding: 35px 20px; border-radius: 35px; text-align: center; border: 1px dashed var(--gold); }
-        .btn-glow { background: linear-gradient(45deg, var(--primary), #ff758c); color: #fff; border: none; padding: 15px 35px; border-radius: 50px; font-weight: 900; cursor: pointer; box-shadow: 0 10px 20px rgba(255, 45, 117, 0.3); }
+        .btn-memories:hover {
+            background: var(--gold);
+            color: #000;
+            transform: translateY(-3px);
+        }
 
-        @keyframes cardEntrance { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes pulseGlow { 0% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.4); } 70% { box-shadow: 0 0 0 15px rgba(212, 175, 55, 0); } 100% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0); } }
-        
-        .heart-float { position: fixed; pointer-events: none; z-index: 100; animation: floatUp 4s forwards; }
-        @keyframes floatUp { 0% { transform: translateY(0) scale(0); opacity: 0; } 50% { opacity: 0.8; } 100% { transform: translateY(-100vh) scale(1.5); opacity: 0; } }
+        /* Animations */
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
 
-        footer { text-align: center; padding: 50px 0; color: #444; font-size: 0.7rem; letter-spacing: 2px; }
+        @keyframes pulse-border {
+            0% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.4); }
+            70% { box-shadow: 0 0 0 10px rgba(212, 175, 55, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0); }
+        }
+
+        @keyframes pulse-gold {
+            0% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.2); }
+            70% { box-shadow: 0 0 0 15px rgba(212, 175, 55, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0); }
+        }
+
+        .heart-float {
+            position: fixed;
+            pointer-events: none;
+            z-index: 100;
+            animation: floatUp 4s forwards linear;
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(0) scale(0); opacity: 0; }
+            20% { opacity: 0.8; }
+            100% { transform: translateY(-100vh) scale(1.5); opacity: 0; }
+        }
+
+        footer {
+            text-align: center;
+            padding: 60px 0 20px;
+            color: var(--gold);
+            font-size: 0.7rem;
+            letter-spacing: 2px;
+            opacity: 0.5;
+        }
     </style>
 </head>
 <body>
 
-    <div class="background-wrap"></div>
-
     <div class="container">
         <div class="hero-card">
-            <div class="profile-pic-frame"><div class="profile-pic"></div></div>
+            <div class="profile-pic-frame">
+                <div class="profile-pic"></div>
+            </div>
             <h1 class="main-title">جوجو</h1>
             <span class="subtitle">♛ ملكةُ مملكَتِي ♛</span>
 
@@ -115,40 +302,54 @@
                 <div class="timer-item"><span id="m">0</span><small>دقيقة</small></div>
             </div>
 
-            <div class="love-bar"><div id="love-fill" class="love-fill"></div></div>
-            <p id="love-percent" style="font-size: 0.8rem; color: var(--gold); font-weight: bold;">جاري قياس العشق...</p>
+            <div class="love-container">
+                <div class="love-bar">
+                    <div id="love-fill" class="love-fill"></div>
+                </div>
+                <p id="love-percent">جاري قياس العشق...</p>
+            </div>
         </div>
 
-        <div class="section-header"><h2>لماذا أنتِ؟</h2><div class="header-line"></div></div>
-        <div class="features">
-            <div class="feature-card" onclick="spawnHearts()"><i class="fas fa-gem"></i><strong>نادرة</strong></div>
-            <div class="feature-card" onclick="spawnHearts()"><i class="fas fa-heart"></i><strong>حنونة</strong></div>
+        <div class="section-title">لماذا أنتِ؟</div>
+        <div class="features-grid">
+            <div class="feature-card" onclick="spawnHearts()">
+                <i class="fas fa-gem"></i>
+                <strong>نادرة</strong>
+            </div>
+            <div class="feature-card" onclick="spawnHearts()">
+                <i class="fas fa-heart"></i>
+                <strong>حنونة</strong>
+            </div>
         </div>
 
-        <div class="section-header"><h2>لغة القلوب</h2><div class="header-line"></div></div>
+        <div class="section-title">لغة القلوب</div>
         <div class="secret-box">
             <div id="secret-lock">
-                <p style="margin-bottom: 20px; color: #aaa;">رسالة مشفرة لا يفتحها إلا اسمكِ..</p>
+                <p style="margin-bottom: 20px; color: #aaa; font-size: 0.9rem;">رسالة مشفرة لا يفتحها إلا اسمكِ..</p>
                 <button class="btn-glow" onclick="unlockSecret()">افتحي القفل 🔐</button>
             </div>
             <div id="secret-content" style="display:none;">
-                <p style="font-family: 'Reem Kufi', serif; font-size: 1.1rem; color: var(--gold);">"أنتِ الموطن والملجأ، أنتِ قطعة من الجنة في حياتي."</p>
+                <p style="font-family: 'Reem Kufi', serif; font-size: 1.2rem; color: var(--gold); line-height: 1.8;">
+                    "أنتِ الموطن والملجأ، أنتِ قطعة من الجنة في حياتي."
+                </p>
             </div>
         </div>
 
         <div class="nav-section">
             <a href="memories.html" class="btn-memories">
-                <i class="fas fa-arrow-right"></i>
-                انتقلي إلى عالم ذكرياتنا
+                <span>انتقلي إلى عالم ذكرياتنا</span>
+                <i class="fas fa-arrow-left"></i>
             </a>
-            <p style="color: #444; font-size: 0.65rem; margin-top: 15px;">انقري هنا لمشاهدة أجمل اللحظات</p>
+            <p style="color: #666; font-size: 0.7rem; margin-top: 15px;">انقري هنا لمشاهدة أجمل اللحظات</p>
         </div>
 
         <footer>صُنع بِكُل حُب لأجلِكِ وَحدكِ | 2026</footer>
     </div>
 
     <script>
+        // تاريخ البداية
         const anniversary = new Date('2026-01-11T00:00:00');
+        
         function updateTimer() {
             const now = new Date();
             const diff = now - anniversary;
@@ -159,24 +360,33 @@
         setInterval(updateTimer, 1000);
         updateTimer();
 
+        // تأثير بار الحب
         setTimeout(() => {
             document.getElementById('love-fill').style.width = '100%';
             let p = 0;
             const interval = setInterval(() => {
-                if(p >= 100) clearInterval(interval);
-                document.getElementById('love-percent').innerText = `نسبة الانتماء: 100.${p++}%`;
+                if(p >= 100) {
+                    clearInterval(interval);
+                    document.getElementById('love-percent').innerText = "نسبة الانتماء: 100% وأكثر..";
+                } else {
+                    document.getElementById('love-percent').innerText = `جاري التحميل: ${p++}%`;
+                }
             }, 30);
         }, 800);
 
+        // فتح الرسالة السرية
         function unlockSecret() {
             const pass = prompt("من هي ملكة هذا القلب؟");
-            if(pass === "جوجو") {
+            if(pass === "جوجو" || pass === "Jojo") {
                 document.getElementById('secret-lock').style.display = 'none';
                 document.getElementById('secret-content').style.display = 'block';
                 spawnHearts();
-            } else { alert("حاولي مجدداً يا أميرتي! 😉"); }
+            } else if (pass !== null) {
+                alert("حاولي مجدداً يا أميرتي! 😉");
+            }
         }
 
+        // انطلاق القلوب
         function spawnHearts() {
             for(let i=0; i<15; i++) {
                 setTimeout(() => {
@@ -185,7 +395,7 @@
                     heart.style.left = Math.random() * 100 + 'vw';
                     heart.style.bottom = '0';
                     heart.style.color = i % 2 === 0 ? 'var(--primary)' : 'var(--gold)';
-                    heart.style.fontSize = (Math.random() * 20 + 10) + 'px';
+                    heart.style.fontSize = (Math.random() * 20 + 15) + 'px';
                     document.body.appendChild(heart);
                     setTimeout(() => heart.remove(), 4000);
                 }, i * 100);
