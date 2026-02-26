@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>مملكة جوجو الأسطورية ✨</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --primary-pink: #ff2d55;
+            --gold: #d4af37;
+            --dark-bg: #050505;
+            --glass-card: rgba(10, 10, 10, 0.88);
+            --border-glow: rgba(212, 175, 55, 0.3);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Cairo', sans-serif; -webkit-tap-highlight-color: transparent; }
+
+        body {
+            background-color: var(--dark-bg);
+            color: white;
+            min-height: 100vh;
+            overflow-x: hidden;
+            background: linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.85)), 
+                        url("f956e35f-ff68-4a94-a494-7abda014cc55.jpg") no-repeat center center fixed;
+            background-size: cover;
+        }
+
+        .bokeh-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none; z-index: 0;
+            background: radial-gradient(circle at 50% 50%, rgba(255, 45, 85, 0.1), transparent 80%);
+        }
+
+        .container { width: 100%; max-width: 450px; padding: 100px 20px 60px; margin: 0 auto; position: relative; z-index: 2; }
+
+        /* Card Style */
+        .hero-card {
+            background: var(--glass-card); backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px);
+            border-radius: 50px; padding: 90px 25px 40px; text-align: center;
+            border: 1px solid var(--border-glow); box-shadow: 0 40px 100px rgba(0,0,0,0.9);
+            position: relative; animation: fadeInScale 1.5s ease-out;
+        }
+
+        .profile-pic {
+            position: absolute; top: -70px; left: 50%; transform: translateX(-50%);
+            width: 140px; height: 140px; border-radius: 50%;
+            background: url("50029e42-2248-41aa-a26f-73c08b5eaf75.jpg") no-repeat center center/cover;
+            border: 4px solid var(--gold); box-shadow: 0 0 40px var(--primary-pink); z-index: 10;
+        }
+
+        .main-title { font-size: 3.5rem; font-weight: 900; text-shadow: 0 0 20px var(--primary-pink); margin-bottom: 5px; }
+        .subtitle { color: var(--gold); letter-spacing: 3px; font-weight: 700; display: block; margin-bottom: 25px; }
+
+        /* Timer & Beats */
+        .timer-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 25px 0; }
+        .t-box { background: rgba(255, 255, 255, 0.05); padding: 15px 5px; border-radius: 20px; border: 1px solid rgba(212, 175, 55, 0.1); }
+        .t-box span { display: block; font-size: 1.8rem; font-weight: 900; color: var(--primary-pink); }
+        .t-box small { color: var(--gold); font-size: 0.7rem; font-weight: bold; }
+
+        /* Love Meter */
+        .love-meter { margin: 20px 0; background: rgba(255, 255, 255, 0.05); border-radius: 20px; height: 15px; border: 1px solid var(--border-glow); overflow: hidden; }
+        .love-fill { width: 0%; height: 100%; background: linear-gradient(90deg, var(--gold), var(--primary-pink)); transition: width 3s ease-in-out; }
+
+        /* Traits Grid */
+        .traits-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 20px 0; }
+        .trait-card { 
+            background: rgba(255, 255, 255, 0.04); border: 1px solid var(--border-glow); 
+            padding: 15px; border-radius: 20px; text-align: center; transition: 0.3s;
+        }
+        .trait-card:active { transform: scale(0.9); background: var(--primary-pink); }
+        .trait-card i { color: var(--gold); font-size: 1.2rem; margin-bottom: 5px; display: block; }
+
+        /* Sections */
+        .section-header { margin: 50px 0 25px; text-align: center; }
+        .section-header h2 { font-size: 1.6rem; font-weight: 900; color: white; }
+        .section-header .line { width: 50px; height: 3px; background: var(--gold); margin: 8px auto; border-radius: 10px; }
+
+        .gallery { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+        .gallery-item { border-radius: 25px; overflow: hidden; height: 180px; border: 1px solid var(--border-glow); }
+        .gallery-item img { width: 100%; height: 100%; object-fit: cover; }
+
+        .secret-btn {
+            background: linear-gradient(45deg, var(--gold), var(--primary-pink));
+            border: none; padding: 18px; border-radius: 50px;
+            color: white; font-weight: 900; width: 100%; cursor: pointer;
+            box-shadow: 0 10px 20px rgba(255, 45, 85, 0.3);
+        }
+
+        #secret-content { display: none; margin-top: 20px; padding: 20px; background: rgba(255,255,255,0.05); border-radius: 25px; border: 1px dashed var(--gold); line-height: 1.8; font-style: italic; }
+
+        /* Animations */
+        .sparkle { position: fixed; width: 12px; height: 12px; border-radius: 50%; pointer-events: none; z-index: 9999; animation: sparkleAnim 0.8s linear forwards; }
+        @keyframes sparkleAnim { to { transform: translateY(-60px) scale(0); opacity: 0; } }
+        
+        .floating { position: fixed; pointer-events: none; z-index: 100; animation: floatUp 5s linear forwards; }
+        @keyframes floatUp { 0% { transform: translateY(0) scale(0); opacity: 0; } 100% { transform: translateY(-100vh) scale(1.5); opacity: 0; } }
+
+        footer { text-align: center; margin-top: 50px; padding-bottom: 40px; color: var(--gold); opacity: 0.6; font-size: 0.8rem; }
+        @keyframes fadeInScale { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
+    </style>
+</head>
+<body>
+
+    <div class="bokeh-overlay"></div>
+
+    <div class="container">
+        <div class="hero-card">
+            <div class="profile-pic"></div>
+            <h1 class="main-title">جوجو</h1>
+            <span class="subtitle">♛ ملكةُ مملكَتِي ♛</span>
+            
+            <div id="greeting" style="font-size: 0.9rem; color: var(--gold); margin-bottom: 15px; font-weight: bold;"></div>
+
+            <div class="timer-grid">
+                <div class="t-box"><span id="days">0</span><small>يوم</small></div>
+                <div class="t-box"><span id="hours">0</span><small>ساعة</small></div>
+                <div class="t-box"><span id="mins">0</span><small>دقيقة</small></div>
+            </div>
+
+            <p style="font-size: 0.8rem; color: var(--gold);">نبضات قلبي في حُبكِ:</p>
+            <div id="beats" style="font-size: 1.8rem; font-weight: 900; color: var(--primary-pink); margin-bottom: 15px;">0</div>
+
+            <div class="love-meter"><div id="loveFill" class="love-fill"></div></div>
+            <div id="lovePercent" style="font-size: 0.75rem; color: var(--gold); font-weight: 900;">0%</div>
+        </div>
+
+        <div class="section-header"><h2>لماذا أنتِ؟ 💎</h2><div class="line"></div></div>
+        <div class="traits-grid">
+            <div class="trait-card" onclick="alert('لأن قلبكِ لا يشبهه أحد ❤️')"><i class="fas fa-heart"></i><span>حنونة</span></div>
+            <div class="trait-card" onclick="alert('ضحكتكِ هي لحني المفضل 🎶')"><i class="fas fa-smile-beam"></i><span>ضحكتكِ</span></div>
+            <div class="trait-card" onclick="alert('ذكاؤكِ هو ما سحرني أول مرة ✨')"><i class="fas fa-brain"></i><span>ذكية</span></div>
+            <div class="trait-card" onclick="alert('أقوى امرأة عرفتها 💪')"><i class="fas fa-gem"></i><span>قوية</span></div>
+        </div>
+
+        <div class="section-header"><h2>ألبوم ذكرياتنا 📸</h2><div class="line"></div></div>
+        <div class="gallery">
+            <div class="gallery-item"><img src="7b8fc8fd-a307-40e9-85ff-b8f8aa10e8df.jpg"></div>
+            <div class="gallery-item"><img src="50029e42-2248-41aa-a26f-73c08b5eaf75.jpg"></div>
+        </div>
+
+        <div class="section-header"><h2>صندوق الأسرار ✨</h2><div class="line"></div></div>
+        <div class="chat-card">
+            <p style="margin-bottom: 15px;">رسالة مخبأة لكِ هنا..</p>
+            <button class="secret-btn" onclick="openSecret()">افتحي الرسالة ✉️</button>
+            <div id="secret-content">
+                "يا جوجو، أنتِ لستِ فقط حبيبتي، أنتِ موطني وأماني. شكراً لأنكِ في حياتي."
+            </div>
+            <div style="text-align: center; margin-top: 40px;">
+    <a href="memories.html" style="text-decoration: none; background: rgba(255,255,255,0.05); border: 1px solid var(--gold); padding: 15px 40px; border-radius: 50px; color: var(--gold); font-weight: bold; display: inline-block; box-shadow: 0 0 15px rgba(212, 175, 55, 0.2);">
+        انتقلي إلى عالم ذكرياتنا ➔
+    </a>
+</div>
+        </div>
+
+
+        <footer>صُنع بِكُل حُب لأجلِكِ وَحدكِ | 2026</footer>
+    </div>
+
+    <script>
+        const start = new Date('2026-01-11T00:00:00');
+        
+        // Timer & Beats
+        function update() {
+            const now = new Date();
+            const diff = now - start;
+            document.getElementById('days').innerText = Math.floor(diff / 86400000);
+            document.getElementById('hours').innerText = Math.floor((diff / 3600000) % 24);
+            document.getElementById('mins').innerText = Math.floor((diff / 60000) % 60);
+            document.getElementById('beats').innerText = (Math.floor(diff / 60000) * 80).toLocaleString();
+        }
+        setInterval(update, 1000); update();
+
+        // Greeting
+        const hour = new Date().getHours();
+        const g = document.getElementById('greeting');
+        if (hour >= 5 && hour < 12) g.innerText = "صباح الجمال يا جوجو ☀️";
+        else if (hour >= 12 && hour < 18) g.innerText = "يومكِ سعيد يا أميرتي 🌸";
+        else g.innerText = "طاب مساؤكِ يا قمر ليلتي 🌙";
+
+        // Love Meter
+        setTimeout(() => {
+            document.getElementById('loveFill').style.width = '100%';
+            let c = 0;
+            const inv = setInterval(() => {
+                if(c >= 100) clearInterval(inv);
+                document.getElementById('lovePercent').innerText = "نِسبة الحُب: " + (c++) + ".999.999%";
+            }, 30);
+        }, 800);
+
+        // Secret Content
+        function openSecret() {
+            const p = prompt("كلمة السر (اسمكِ بالدلع):");
+            if(p === "جوجو") {
+                document.getElementById('secret-content').style.display = 'block';
+                window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+            } else { alert("حاولي مجدداً يا أميرتي! 😉"); }
+        }
+
+        // Sparkles on Touch
+        document.addEventListener('touchstart', (e) => {
+            for(let i=0; i<6; i++) {
+                const s = document.createElement('div');
+                s.className = 'sparkle';
+                s.style.left = e.touches[0].pageX + 'px';
+                s.style.top = e.touches[0].pageY + 'px';
+                s.style.background = i % 2 === 0 ? '#ff2d55' : '#d4af37';
+                document.body.appendChild(s);
+                setTimeout(() => s.remove(), 800);
+            }
+        });
+
+        // Floating Icons
+        const icons = ['❤️', '✨', '👑', '🌸'];
+        setInterval(() => {
+            const el = document.createElement('div');
+            el.className = 'floating';
+            el.innerHTML = icons[Math.floor(Math.random()*icons.length)];
+            el.style.left = Math.random() * 100 + 'vw';
+            el.style.bottom = "-50px";
+            document.body.appendChild(el);
+            setTimeout(() => el.remove(), 5000);
+        }, 600);
+    </script>
+</body>
+</html>
