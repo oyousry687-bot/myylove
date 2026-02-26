@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>مملكة جـوجـو الأبدية ✨</title>
     
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&family=Reem+Kufi:wght@500;700&family=Aref+Ruqaa:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Almarai:wght@300;400;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
 
@@ -15,29 +15,29 @@
             --gold: #d4af37;
             --bg-dark: #050505;
             --glass: rgba(255, 255, 255, 0.03);
-            --glass-heavy: rgba(10, 10, 10, 0.85);
-            --border: rgba(212, 175, 55, 0.25);
-            --transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+            --border: rgba(212, 175, 55, 0.2);
+            --transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
         }
 
-        /* منع التحديد واللمس العشوائي */
-        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        * { 
+            margin: 0; 
+            padding: 0; 
+            box-sizing: border-box; 
+            -webkit-tap-highlight-color: transparent; 
+            font-family: 'Almarai', sans-serif; /* تطبيق الخط الجديد على كل شيء */
+        }
         
         body {
             background-color: var(--bg-dark);
             color: #fff;
-            font-family: 'Cairo', sans-serif;
             overflow-x: hidden;
             min-height: 100vh;
+            line-height: 1.6;
         }
 
-        /* خلفية النجوم المتحركة */
         #canvas-stars {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: 0; left: 0; width: 100%; height: 100%;
             z-index: -1;
             background: radial-gradient(circle at center, #1a0510 0%, #050505 100%);
         }
@@ -49,131 +49,128 @@
             position: relative;
         }
 
-        /* زر العودة الأنيق */
+        /* زر العودة */
         .back-nav { margin-bottom: 40px; opacity: 0; animation: fadeInDown 1s forwards; }
         .back-link {
             text-decoration: none;
             color: var(--gold);
-            font-size: 0.9rem;
-            letter-spacing: 1px;
+            font-size: 0.85rem;
+            font-weight: 700;
             display: flex;
             align-items: center;
-            gap: 10px;
-            padding: 8px 15px;
+            gap: 8px;
+            padding: 10px 18px;
             border: 1px solid var(--border);
             border-radius: 50px;
             width: fit-content;
             background: var(--glass);
             transition: var(--transition);
         }
-        .back-link:hover { background: var(--gold); color: #000; transform: scale(1.05); }
+        .back-link:hover { background: var(--gold); color: #000; }
 
-        /* الهيدر الفخم */
-        .page-header { text-align: center; margin-bottom: 60px; }
+        /* الهيدر */
+        .page-header { text-align: center; margin-bottom: 50px; }
         .page-title {
-            font-family: 'Aref Ruqaa', serif;
-            font-size: 3.2rem;
+            font-size: 2.5rem;
+            font-weight: 800;
             margin-bottom: 10px;
-            background: linear-gradient(to bottom, #fff 20%, var(--gold) 80%);
+            background: linear-gradient(to bottom, #fff 40%, var(--gold) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            filter: drop-shadow(0 0 15px rgba(212, 175, 55, 0.3));
+            letter-spacing: -1px;
+        }
+        .page-subtitle { 
+            color: #888; 
+            font-size: 0.8rem; 
+            letter-spacing: 2px; 
+            font-weight: 400;
         }
 
-        /* الأظرف التفاعلية */
+        /* العناوين الفرعية */
         .section-label {
-            font-family: 'Reem Kufi', sans-serif;
             text-align: center;
             color: var(--gold);
-            font-size: 1.4rem;
+            font-size: 1.1rem;
+            font-weight: 700;
             margin-bottom: 30px;
             display: flex;
             align-items: center;
             gap: 15px;
         }
         .section-label::before, .section-label::after {
-            content: ""; flex: 1; height: 1px; background: linear-gradient(90deg, transparent, var(--border), transparent);
+            content: ""; flex: 1; height: 1px; background: var(--border);
         }
 
-        .envelope-stack { display: grid; gap: 25px; }
-
+        /* البطاقات */
+        .envelope-stack { display: grid; gap: 20px; }
         .envelope-item {
             background: var(--glass);
             border: 1px solid var(--border);
-            border-radius: 25px;
-            padding: 30px 20px;
+            border-radius: 20px;
+            padding: 25px 20px;
             text-align: center;
             transition: var(--transition);
             cursor: pointer;
-            backdrop-filter: blur(15px);
-            position: relative;
-            overflow: hidden;
+            backdrop-filter: blur(10px);
         }
-
-        .envelope-item::before {
-            content: ""; position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.05), transparent);
-            transition: 0.8s;
-        }
-
-        .envelope-item:hover::before { left: 100%; }
-
         .envelope-item:hover {
-            transform: translateY(-10px) scale(1.02);
+            transform: translateY(-5px);
             border-color: var(--primary);
-            box-shadow: 0 15px 40px rgba(255, 45, 117, 0.15);
         }
 
         .env-icon-box {
-            width: 70px; height: 70px; background: rgba(0,0,0,0.3);
-            border-radius: 50%; margin: 0 auto 20px;
+            width: 60px; height: 60px; background: rgba(255,255,255,0.03);
+            border-radius: 50%; margin: 0 auto 15px;
             display: flex; align-items: center; justify-content: center;
             border: 1px solid var(--border);
-            transition: var(--transition);
         }
+        .env-icon-box i { font-size: 1.5rem; color: var(--gold); transition: 0.3s; }
 
-        .env-icon-box i { font-size: 1.8rem; color: var(--gold); }
-
-        .envelope-item.active .env-icon-box { background: var(--primary); transform: rotateY(180deg); }
+        .envelope-item.active .env-icon-box { background: var(--primary); border-color: var(--primary); }
         .envelope-item.active .env-icon-box i { color: #fff; }
 
+        .envelope-item h3 { font-size: 1.1rem; font-weight: 700; color: #fff; margin-bottom: 5px; }
+
         .env-text {
-            font-size: 1rem; color: #ddd; max-height: 0; opacity: 0; overflow: hidden;
-            transition: all 0.5s ease-in-out; line-height: 1.8;
+            font-size: 0.95rem; 
+            color: #bbb; 
+            max-height: 0; 
+            opacity: 0; 
+            overflow: hidden;
+            transition: all 0.5s ease;
+            font-weight: 400;
         }
-
         .envelope-item.active .env-text {
-            max-height: 200px; opacity: 1; margin-top: 20px; padding-top: 20px;
-            border-top: 1px solid rgba(255,255,255,0.1);
+            max-height: 150px; opacity: 1; margin-top: 15px; padding-top: 15px;
+            border-top: 1px solid rgba(255,255,255,0.05);
         }
 
-        /* الوعود (العهود) */
-        .promise-list { margin-top: 50px; }
+        /* الوعود */
+        .promise-list { margin-top: 40px; }
         .promise-card {
-            background: linear-gradient(45deg, rgba(212,175,55,0.05), transparent);
-            border-right: 3px solid var(--gold);
-            padding: 20px; margin-bottom: 15px; border-radius: 0 15px 15px 0;
+            background: rgba(255,255,255,0.02);
+            border-right: 4px solid var(--gold);
+            padding: 18px; margin-bottom: 12px; border-radius: 8px 15px 15px 8px;
             display: flex; align-items: center; gap: 15px;
-            animation: slideInRight 1s both;
+            font-size: 0.95rem;
+            font-weight: 400;
         }
-        .promise-card i { color: var(--primary); filter: drop-shadow(0 0 5px var(--primary)); }
+        .promise-card i { color: var(--primary); font-size: 1.1rem; }
 
-        /* Footer */
         footer {
-            text-align: center; margin-top: 80px; padding-bottom: 40px;
-            font-size: 0.75rem; color: #444; text-transform: uppercase; letter-spacing: 2px;
+            text-align: center; margin-top: 60px; padding-bottom: 40px;
+            font-size: 0.7rem; color: #444; font-weight: 700; letter-spacing: 1px;
         }
 
-        /* Heart Particles */
         .floating-heart {
             position: fixed; pointer-events: none; z-index: 1000;
-            animation: flyUp 4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+            animation: flyUp 4s linear forwards;
         }
 
         @keyframes flyUp {
-            0% { transform: translateY(0) scale(0) rotate(0deg); opacity: 0; }
+            0% { transform: translateY(0) scale(0); opacity: 0; }
             20% { opacity: 0.8; }
-            100% { transform: translateY(-100vh) scale(1.5) rotate(360deg); opacity: 0; }
+            100% { transform: translateY(-100vh) scale(1.2); opacity: 0; }
         }
 
         @keyframes fadeInDown {
@@ -189,14 +186,14 @@
     <div class="container">
         <nav class="back-nav">
             <a href="memories.html" class="back-link">
-                <i class="fas fa-long-arrow-alt-right"></i>
-                عودة للذكريات
+                <i class="fas fa-arrow-right"></i>
+                <span>عودة للذكريات</span>
             </a>
         </nav>
 
         <header class="page-header">
             <h1 class="page-title animate__animated animate__fadeIn">عهود الأبد</h1>
-            <p style="color: #888; letter-spacing: 2px;">TO MY ONE AND ONLY JOJO</p>
+            <p class="page-subtitle">TO MY ONE AND ONLY JOJO</p>
         </header>
 
         <div class="section-label">رسائل سرية 💌</div>
@@ -204,45 +201,45 @@
         <div class="envelope-stack">
             <div class="envelope-item" onclick="toggleEnv(this)">
                 <div class="env-icon-box"><i class="fas fa-moon"></i></div>
-                <h3 style="color: var(--gold); font-family: 'Reem Kufi';">حين تشتاقين لي</h3>
+                <h3>حين تشتاقين لي</h3>
                 <p class="env-text">تذكري أننا تحت ذات السماء، وأن كل نبضة في قلبي تهتف باسمكِ. أنا دائماً أقرب إليكِ من حبل الوريد.</p>
             </div>
 
             <div class="envelope-item" onclick="toggleEnv(this)">
                 <div class="env-icon-box"><i class="fas fa-shield-alt"></i></div>
-                <h3 style="color: var(--gold); font-family: 'Reem Kufi';">حين تحتاجين أماناً</h3>
+                <h3>حين تحتاجين أماناً</h3>
                 <p class="env-text">أنا هنا.. جداركِ الذي لا يسقط، وسيفكِ الذي لا ينثني. كوني مطمئنة، فخلفكِ رجل يبيع العالم لأجل ابتسامتكِ.</p>
             </div>
 
             <div class="envelope-item" onclick="toggleEnv(this)">
                 <div class="env-icon-box"><i class="fas fa-crown"></i></div>
-                <h3 style="color: var(--gold); font-family: 'Reem Kufi';">لأنكِ ملكتي</h3>
+                <h3>لأنكِ ملكتي</h3>
                 <p class="env-text">أعدكِ أن أعاملكِ كأثمن ما أملك، وأن أرى فيكِ كل نساء الأرض، فلا تملأ عيني غيركِ أبداً.</p>
             </div>
         </div>
 
-        <div class="section-label" style="margin-top: 60px;">وعود مقدسة 💍</div>
+        <div class="section-label" style="margin-top: 50px;">وعود مقدسة 💍</div>
         
         <div class="promise-list">
-            <div class="promise-card" style="animation-delay: 0.2s;">
+            <div class="promise-card">
                 <i class="fas fa-infinity"></i>
                 <span>أعدكِ أن أكون وطناً لا يضيق بكِ أبداً.</span>
             </div>
-            <div class="promise-card" style="animation-delay: 0.4s;">
+            <div class="promise-card">
                 <i class="fas fa-star"></i>
                 <span>أعدكِ أن أجعل حياتكِ مليئة بالدهشة والحب.</span>
             </div>
-            <div class="promise-card" style="animation-delay: 0.6s;">
+            <div class="promise-card">
                 <i class="fas fa-pray"></i>
                 <span>أعدكِ أن تكوني دعائي الأول في كل سجدة.</span>
             </div>
         </div>
 
-        <footer>MAMLAKAT JOJO • EST 2026 • WITH LOVE</footer>
+        <footer>MAMLAKAT JOJO • EST 2026</footer>
     </div>
 
     <script>
-        // تأثير النجوم المتحركة (Stars Logic)
+        // سكريبت النجوم والقلوب يبقى كما هو لضمان الجمالية البصرية
         const canvas = document.getElementById('canvas-stars');
         const ctx = canvas.getContext('2d');
         let stars = [];
@@ -255,15 +252,15 @@
                 stars.push({
                     x: Math.random() * canvas.width,
                     y: Math.random() * canvas.height,
-                    size: Math.random() * 2,
-                    speed: Math.random() * 0.5 + 0.1
+                    size: Math.random() * 1.5,
+                    speed: Math.random() * 0.4 + 0.1
                 });
             }
         }
 
         function drawStars() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
-            ctx.fillStyle = "#fff";
+            ctx.fillStyle = "rgba(255, 255, 255, 0.8)";
             stars.forEach(s => {
                 ctx.beginPath();
                 ctx.arc(s.x, s.y, s.size, 0, Math.PI * 2);
@@ -278,11 +275,9 @@
         initCanvas();
         drawStars();
 
-        // وظائف الأظرف والقلوب
         function toggleEnv(el) {
             const isActive = el.classList.contains('active');
             document.querySelectorAll('.envelope-item').forEach(e => e.classList.remove('active'));
-            
             if(!isActive) {
                 el.classList.add('active');
                 createHearts();
@@ -290,17 +285,14 @@
         }
 
         function createHearts() {
-            for(let i=0; i<12; i++) {
+            for(let i=0; i<10; i++) {
                 setTimeout(() => {
                     const heart = document.createElement('i');
-                    const isGold = Math.random() > 0.5;
                     heart.className = `fas fa-heart floating-heart`;
                     heart.style.left = Math.random() * 100 + 'vw';
-                    heart.style.bottom = '-10vh';
-                    heart.style.color = isGold ? '#d4af37' : '#ff2d75';
-                    heart.style.fontSize = (Math.random() * 20 + 15) + 'px';
-                    heart.style.filter = `blur(${Math.random() * 2}px)`;
-                    
+                    heart.style.bottom = '-5vh';
+                    heart.style.color = Math.random() > 0.5 ? '#d4af37' : '#ff2d75';
+                    heart.style.fontSize = (Math.random() * 15 + 10) + 'px';
                     document.body.appendChild(heart);
                     setTimeout(() => heart.remove(), 4000);
                 }, i * 150);
