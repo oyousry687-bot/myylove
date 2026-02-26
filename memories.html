@@ -4,15 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>ذكرياتنا الخالدة ✨</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&family=Reem+Kufi:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <style>
         :root {
             --primary-pink: #ff2d55;
             --gold: #d4af37;
             --dark-bg: #050505;
             --glass: rgba(15, 15, 15, 0.85);
-            --card-shadow: rgba(212, 175, 55, 0.15);
+            --border: rgba(212, 175, 55, 0.25);
+            --transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
         }
 
         * { 
@@ -25,6 +28,7 @@
             background-color: var(--dark-bg);
             color: white;
             min-height: 100vh;
+            /* استبدل رابط الصورة برابط صورتك إذا لزم الأمر */
             background: linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.85)), 
                         url("7b8fc8fd-a307-40e9-85ff-b8f8aa10e8df.jpg") no-repeat center center fixed;
             background-size: cover;
@@ -36,21 +40,27 @@
         .back-btn {
             position: fixed; top: 20px; right: 20px;
             color: white; text-decoration: none; font-size: 0.85rem;
-            background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px);
+            background: var(--glass); backdrop-filter: blur(10px);
             padding: 10px 20px; border-radius: 40px; 
-            border: 1px solid rgba(212, 175, 55, 0.3); z-index: 1000;
+            border: 1px solid var(--border); z-index: 1000;
             display: flex; align-items: center; gap: 10px;
-            transition: 0.3s;
+            transition: var(--transition);
         }
+        .back-btn:hover { background: var(--gold); color: #000; }
 
         header { 
             text-align: center; margin: 80px 0 40px; 
             animation: fadeInDown 1s ease-out;
         }
-        header h1 { font-size: 2.5rem; font-weight: 900; background: linear-gradient(to bottom, #fff, var(--gold)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        header p { color: var(--gold); font-size: 0.9rem; opacity: 0.8; margin-top: 5px; }
+        header h1 { 
+            font-family: 'Reem Kufi', sans-serif;
+            font-size: 2.8rem; font-weight: 900; 
+            background: linear-gradient(to bottom, #fff, var(--gold)); 
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; 
+        }
+        header p { color: var(--gold); font-size: 0.9rem; opacity: 0.8; margin-top: 5px; letter-spacing: 1px; }
 
-        /* Timeline احترافي */
+        /* Timeline */
         .timeline { position: relative; margin: 40px 0; }
         .timeline::after {
             content: ''; position: absolute; width: 2px; 
@@ -64,56 +74,51 @@
         }
 
         .timeline-item::after {
-            content: ''; position: absolute; width: 14px; height: 14px;
+            content: ''; position: absolute; width: 12px; height: 12px;
             background: var(--gold); box-shadow: 0 0 15px var(--gold);
             top: 35px; border-radius: 50%; z-index: 10;
         }
 
         .left { left: 0; text-align: left; padding-right: 30px; }
         .right { left: 50%; text-align: right; padding-left: 30px; }
-        .left::after { right: -7px; }
-        .right::after { left: -7px; }
+        .left::after { right: -6px; }
+        .right::after { left: -6px; }
 
         .content {
             padding: 15px; background: var(--glass); 
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid var(--border);
             border-radius: 20px; backdrop-filter: blur(10px);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            transition: var(--transition);
         }
-        .content h3 { color: var(--gold); font-size: 0.85rem; margin-bottom: 5px; }
-        .content p { font-size: 0.8rem; line-height: 1.6; color: #ddd; }
+        .content:hover { transform: scale(1.03); border-color: var(--gold); }
+        .content h3 { color: var(--gold); font-size: 0.9rem; margin-bottom: 5px; }
+        .content p { font-size: 0.85rem; line-height: 1.6; color: #ddd; }
 
-        /* كروت الذكريات المطورة */
+        /* Memories Grid */
         .memories-grid {
             display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 30px;
         }
 
         .memory-card { height: 220px; perspective: 1000px; }
-
         .memory-inner {
             position: relative; width: 100%; height: 100%;
-            transition: transform 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             transform-style: preserve-3d;
         }
-
         .memory-card.flipped .memory-inner { transform: rotateY(180deg); }
 
         .memory-front, .memory-back {
             position: absolute; width: 100%; height: 100%; 
             backface-visibility: hidden; border-radius: 25px; 
-            border: 1px solid rgba(212, 175, 55, 0.2);
-            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+            border: 1px solid var(--border);
         }
-
         .memory-front img { width: 100%; height: 100%; object-fit: cover; border-radius: 25px; }
-
         .memory-back {
-            background: linear-gradient(135deg, #111, #000); 
+            background: linear-gradient(135deg, #111, #050505); 
             color: var(--gold); display: flex; align-items: center; 
             justify-content: center; transform: rotateY(180deg); 
             padding: 20px; text-align: center;
         }
-
         .memory-back p { font-size: 0.85rem; line-height: 1.6; font-style: italic; }
 
         .hint-text {
@@ -121,7 +126,50 @@
             font-size: 0.8rem; opacity: 0.6; display: flex; align-items: center; justify-content: center; gap: 8px;
         }
 
-        /* Animations */
+        /* زر الوعود المطور (Luxury Button) */
+        .luxury-button {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            padding: 18px 40px;
+            background: rgba(212, 175, 55, 0.05);
+            border: 1px solid var(--gold);
+            border-radius: 100px;
+            overflow: hidden;
+            transition: var(--transition);
+            z-index: 1;
+            animation: pulse-gold 2s infinite;
+        }
+
+        .btn-content {
+            display: flex; align-items: center; gap: 12px;
+            color: var(--gold); font-weight: 700; font-size: 1rem;
+            z-index: 2; transition: 0.4s;
+        }
+
+        .btn-shimmer {
+            position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.3), transparent);
+            transition: 0.6s; z-index: 1;
+        }
+
+        .luxury-button:hover {
+            transform: translateY(-5px);
+            background: var(--gold);
+            box-shadow: 0 15px 30px rgba(212, 175, 55, 0.3);
+        }
+
+        .luxury-button:hover .btn-content { color: #000; }
+        .luxury-button:hover .btn-shimmer { left: 100%; }
+
+        @keyframes pulse-gold {
+            0% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.4); }
+            70% { box-shadow: 0 0 0 15px rgba(212, 175, 55, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0); }
+        }
+
         @keyframes fadeInUp {
             from { opacity: 0; transform: translateY(30px); }
             to { opacity: 1; transform: translateY(0); }
@@ -131,12 +179,17 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        footer { text-align: center; margin-top: 60px; padding: 30px 0; border-top: 1px solid rgba(255,255,255,0.05); color: var(--gold); font-size: 0.7rem; opacity: 0.5; }
+        footer { 
+            text-align: center; margin-top: 60px; padding: 40px 0; 
+            border-top: 1px solid rgba(255,255,255,0.05); 
+            color: var(--gold); font-size: 0.75rem; opacity: 0.5; 
+            letter-spacing: 1px;
+        }
     </style>
 </head>
 <body>
 
-    <a href="index.html" class="back-btn"><i class="fas fa-chevron-right"></i> العودة للرئيسية</a>
+    <a href="index.html" class="back-btn"><i class="fas fa-chevron-right"></i> الرئيسية</a>
 
     <header>
         <h1>حكاية جوجو</h1>
@@ -146,11 +199,11 @@
     <div class="timeline">
          <div class="timeline-item left">
             <div class="content">
-                <h3> يناير ٢٠٢٦</h3>
-                <p>أول نبضة حقيقية.. اليوم الذي بدأ فيه كل شيء.</p>
+                <h3>يناير ٢٠٢٦</h3>
+                <p>أول نبضة حقيقية.. اليوم الذي بدأ فيه كل شيء وتغير فيه عالمي.</p>
             </div>
         </div>
-        <div class="timeline-item left" style="animation-delay: 0.3s;">
+        <div class="timeline-item right" style="animation-delay: 0.3s;">
             <div class="content">
                 <h3>فبراير ٢٠٢٦</h3>
                 <p>ضحكتكِ الأولى التي سكنت في ذاكرتي وصارت هي نشيدي المفضل.</p>
@@ -166,7 +219,7 @@
         <div class="memory-card" onclick="this.classList.toggle('flipped')">
             <div class="memory-inner">
                 <div class="memory-front">
-                    <img src="9a64d4d0-e2f9-4d91-8c25-7f656cffb0f9.jpg">
+                    <img src="9a64d4d0-e2f9-4d91-8c25-7f656cffb0f9.jpg" alt="Memory 1">
                 </div>
                 <div class="memory-back">
                     <p>في هذه اللحظة، شعرت أن العالم كله توقف ليراقب جمالكِ ❤️</p>
@@ -176,35 +229,31 @@
         <div class="memory-card" onclick="this.classList.toggle('flipped')">
             <div class="memory-inner">
                 <div class="memory-front">
-                    <img src="79423fe8-63cf-4dab-a764-358bc324d587.jpg">
+                    <img src="79423fe8-63cf-4dab-a764-358bc324d587.jpg" alt="Memory 2">
                 </div>
                 <div class="memory-back">
-                    <p>عيناكِ تحكيان قصصاً من الذكاء والسحر لا يمل قلبي من قراءتها ✨</p>
+                    <p>عيناكِ تحكيان قصصاً من السحر لا يمل قلبي من قراءتها ✨</p>
                 </div>
             </div>
         </div>
-<div style="text-align: center; margin: 50px 0;">
-    <p style="color: #888; font-size: 0.8rem; margin-bottom: 15px;">بعد أن استعدنا ذكرياتنا.. دعينا ننظر للمستقبل</p>
-    <a href="promises.html" style="
-        display: inline-block;
-        text-decoration: none;
-        background: linear-gradient(45deg, #d4af37, #ff2d75);
-        color: white;
-        padding: 15px 35px;
-        border-radius: 50px;
-        font-weight: 900;
-        box-shadow: 0 10px 20px rgba(255, 45, 117, 0.3);
-        transition: 0.3s;
-    ">
-        إلى وعودنا ورسائلنا القادمة ✨
-    </a>
-</div>
     </div>
 
-    <footer>بُنيت هذه الذكرى بـ "حب" لتليق بكِ فقط | 2026</footer>
+    <div style="text-align: center; margin: 80px 0 40px;">
+        <p style="color: #666; font-size: 0.85rem; margin-bottom: 25px; letter-spacing: 1px;">بعد أن استعدنا ذكرياتنا.. دعينا ننظر للمستقبل</p>
+        
+        <a href="promises.html" class="luxury-button">
+            <span class="btn-content">
+                <i class="fas fa-scroll"></i>
+                إلى وعودنا ورسائلنا القادمة
+            </span>
+            <div class="btn-shimmer"></div>
+        </a>
+    </div>
+
+    <footer>صُنع بكل حب لتخليد أجمل اللحظات | 2026</footer>
 
     <script>
-        // تأثير بسيط لجعل العناصر تظهر عند السكرول (اختياري)
+        // تفعيل استجابة اللمس على الهواتف
         document.addEventListener('touchstart', function() {}, {passive: true});
     </script>
 </body>
